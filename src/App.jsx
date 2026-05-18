@@ -8,6 +8,7 @@ import News from "./components/News";
 const App = () => {
   const pageSize = 5;
   const apiKey = import.meta.env.VITE_APP_NEWS_API;
+  console.log(apiKey);
   const [progress, setProgress] = useState(0);
 
   return (
