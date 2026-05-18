@@ -7,8 +7,10 @@ import Spinner from "./Spinner";
 const News = (props) => {
     const [articles, setArticles] = useState([]), [loading, setLoading] = useState(true), [page, setPage] = useState(1), [totalResults, setTotalResults] = useState(0);
 
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-
+    const capitalizeFirstLetter = (string) => {
+        if (!string) return "";
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
     const updateNews = async () => {
         try {
             props.setProgress(10);
@@ -68,7 +70,7 @@ const News = (props) => {
             <InfiniteScroll dataLength={articles?.length || 0} next={fetchMoreData} hasMore={articles.length !== totalResults} loader={<Spinner />}>
                 <div className="container">
                     <div className="row">
-                        {articles?.map((element) => <div className="col-md-4" key={element.url}><NewsItem title={element.title || ""} description={element.description || ""} imageUrl={element.image} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source?.name} /></div>)}
+                        {articles?.map((element) => <div className="col-md-4" key={element.url}><NewsItem title={element.title || ""} description={element.description || ""} imageUrl={element.image} newsUrl={element.url} name={element.name} date={element.publishedAt} source={element.source?.name} /></div>)}
                     </div>
                 </div>
             </InfiniteScroll>
